@@ -37,24 +37,28 @@ cd EduPersona
 ```
 
 
-3. **Set Up a Virtual Environment** (Optional but recommended)
+2. **Set Up a Virtual Environment** (Optional but recommended)
 ```bash
 -m venv venv
 source venv/bin/activate # On Windows use venv\Scripts\activate
 ```
 
 
-4. **Install Requirements**
+3. **Install Dependencies**
 ```bash
-pip install -r requirements.txt
+pip install Flask
+pip install requests
+pip install openai
 ```
 
 
-5. **Environment Variables**
-- Create a `.env` file in the root directory and add your OpenAI API Key:
+4. **Configure API Key**
+- Create a file named 'config.py' in the root directory of the project.
+- Add the following line to 'config.py' to define your OpenAI API key:
 ```bash
-OPENAI_API_KEY='your_openai_api_key_here'
+API_KEY = 'your_openai_api_key_here'
 ```
+- Ensure that this key matches the one you have from OpenAI and replace 'your_openai_api_key_here' with your actual API key.
 
 6. **Run the Application**
 ```bash
@@ -64,8 +68,8 @@ flask run
 
 ## Configuration
 
-- Ensure that the API key is correctly set in the environment variables.
-- Configure port and debug options in Flask as needed.
+- Make sure the API key in 'config.py' is set correctly.
+- Configure the Flask application's port and debug options as needed for your development environment.
 
 ## Usage
 
