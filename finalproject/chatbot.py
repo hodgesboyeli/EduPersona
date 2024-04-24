@@ -35,38 +35,13 @@ def upload_audio():
 
     return jsonify({"transcript": transcript}), 200
 
-@app.route('/synthesize', methods=['POST'])
-def synthesize():
-    data = request.get_json()
-    text = data['text']
-
-    textResponse = openai.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {
-                "role": "user",
-                "content": text,
-            },
-        ],
-    )
-    answer = textResponse.choices[0].message.content
-    
-    voiceResponse = openai.audio.speech.create(
-        model="tts-1",
-        voice="nova",  # Experiment with different voices (alloy, echo, fable, onyx, nova, and shimmer) 
-        input=answer
-    )
-    
-    voiceResponse.stream_to_file("synthesized.mp3")
-    
-    return jsonify("Success")
-
 @app.route('/analyze', methods=['POST'])
 def analyze_image():
     subject = request.form.get('subject', '').strip('📚🧮📖🧪📜')
     tone = request.form.get('tone', '')
     gradeLevel = request.form.get('gradeLevel', '')
     question = request.form.get('question', '')
+    voice = request.form.get('voice', 'Nova')
     file = request.files.get('file') if 'file' in request.files else None
 
     context = f"Take the persona of a(n) {subject} professor and answer this question in the tone of a {tone} as if you were talking to a {gradeLevel} student: {question}\n\n Additionally, create a 5 question worksheet."
@@ -111,6 +86,16 @@ def analyze_image():
             ],
         )
         answer = response.choices[0].message.content
+
+      
+        voiceResponse = openai.audio.speech.create(
+        model="tts-1",
+        voice=voice,
+        input=answer
+        )
+
+        voiceResponse.stream_to_file("synthesized.mp3")
+  
     except Exception as e:
         answer = str(e)
 
