@@ -53,6 +53,21 @@
             </div>
         </div>
         <div class="d-flex justify-content-center" style="padding-top: 10px">
+            <div class="btn-group">
+                <button id="dropdownMenuButton4" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Voice 🔊
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="updateButton4('alloy')">alloy</a>
+                    <a class="dropdown-item" onclick="updateButton4('echo')">echo</a>
+                    <a class="dropdown-item" onclick="updateButton4('fable')">fable</a>
+                    <a class="dropdown-item" onclick="updateButton4('onyx')">onyx</a>
+                    <a class="dropdown-item" onclick="updateButton4('nova')">nova</a>
+                    <a class="dropdown-item" onclick="updateButton4('shimmer')">shimmer</a>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center" style="padding-top: 10px">
             <button id="speak" type="button" class="btn btn-primary rounded-circle">
                 <i class="fas fa-microphone"></i>
             </button>
@@ -83,6 +98,9 @@
                 <div class="mt-3 text-center">
                     <textarea id="resultArea" rows="10" cols="50" class="form-control" placeholder="Result will appear here..."></textarea>
                 </div>
+                <div class="d-flex justify-content-center" style="padding-top: 20px; padding-bottom: 20px;">
+                    <audio id="audioPlayer" controls hidden></audio>
+                </div>
             </div>
         </div>
     </div>
@@ -90,6 +108,7 @@
     <script>
         let subject = '';
         let tone = '';
+        let selectedVoice = 'Nova';  // Default voice
 
         function updateButton1(text) {
             var button = document.getElementById('dropdownMenuButton1');
@@ -109,6 +128,13 @@
             var button = document.getElementById('dropdownMenuButton3');
             button.textContent = text;
             tone = text;
+            checkFields();
+        }
+
+        function updateButton4(text) {
+            var button = document.getElementById('dropdownMenuButton4');
+            button.textContent = text;
+            selectedVoice = text;  // Update the selected voice
             checkFields();
         }
 
@@ -183,7 +209,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
+        
         function submitQuestion() {
             const analyzeButton = document.getElementById('analyzeButton');
             const resultArea = document.getElementById('resultArea');
@@ -202,6 +228,7 @@
             formData.append('subject', subject);
             formData.append('tone', tone);
             formData.append('question', question);
+            formData.append('voice', selectedVoice);
 
             fetch('/analyze', {
                 method: 'POST',
@@ -212,6 +239,13 @@
                 resultArea.placeholder = 'Result will appear here...';
                 resultArea.value = data.answer;
                 analyzeButton.disabled = false;
+
+                
+                const now = new Date().getTime(); // Current timestamp as cache buster
+                const audioPlayer = document.getElementById('audioPlayer');
+				        audioPlayer.src = "https://athenarespond-bishopprague.codio.io/finalproject/synthesized.mp3?cb=" + now;
+                audioPlayer.hidden = false;
+                audioPlayer.play();
             })
             .catch(error => {
                 console.error('Error:', error);
