@@ -58,7 +58,7 @@ pip install openai
 ```bash
 API_KEY = 'your_openai_api_key_here'
 ```
-- Ensure that this key matches the one you have from OpenAI and replace 'your_openai_api_key_here' with your actual API key.
+- Ensure that this key matches the one you have from OpenAI and replace `your_openai_api_key_here` with your actual API key.
 
 6. **Run the Application**
 ```bash
