@@ -31,26 +31,35 @@ EduPersona is a web-based interactive chatbot that utilizes advanced AI technolo
 ## Installation
 
 1. **Clone the Repository**
-```git clone https://github.com/yourusername/EduPersona.git```
+```bash
+git clone https://github.com/yourusername/EduPersona.git
 cd EduPersona
+```
 
 
-2. **Set Up a Virtual Environment** (Optional but recommended)
-python -m venv venv
+3. **Set Up a Virtual Environment** (Optional but recommended)
+```bash
+-m venv venv
 source venv/bin/activate # On Windows use venv\Scripts\activate
+```
 
 
-3. **Install Requirements**
+4. **Install Requirements**
+```bash
 pip install -r requirements.txt
+```
 
 
-4. **Environment Variables**
+5. **Environment Variables**
 Create a `.env` file in the root directory and add your OpenAI API Key:
+
 OPENAI_API_KEY='your_openai_api_key_here'
 
 
-5. **Run the Application**
+6. **Run the Application**
+```bash
 flask run
+```
 
 
 ## Configuration
