@@ -1,2 +1,5 @@
-
+# Ignore configuration files that contain sensitive information
 finalproject/config.py
+
+# Ignore Mac OS filesystem files
+.DS_Store
