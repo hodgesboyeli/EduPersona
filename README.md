@@ -31,7 +31,7 @@ EduPersona is a web-based interactive chatbot that utilizes advanced AI technolo
 ## Installation
 
 1. **Clone the Repository**
-git clone https://github.com/yourusername/EduPersona.git
+```git clone https://github.com/yourusername/EduPersona.git```
 cd EduPersona
 
 
