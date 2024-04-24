@@ -53,7 +53,7 @@ pip install openai
 
 
 4. **Configure API Key**
-- Create a file named `config.p` in the root directory of the project.
+- Create a file named `config.py` in the root directory of the project.
 - Add the following line to `config.py` to define your OpenAI API key:
 ```bash
 API_KEY = 'your_openai_api_key_here'
